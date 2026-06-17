@@ -4,14 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.noticoin.ui.screens.home.HomeScreen
+import com.example.noticoin.ui.screens.login.LoginScreen
+import com.example.noticoin.ui.screens.register.RegisterScreen
 import com.example.noticoin.ui.theme.NotiCoinTheme
+
+sealed class Ruta(val ruta: String) {
+    object Login : Ruta("login")
+    object Register : Ruta("register")
+    object Home : Ruta("home")
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,29 +26,44 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NotiCoinTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = Ruta.Login.ruta
+                ) {
+                    composable(
+                        route = Ruta.Login.ruta,
+                        enterTransition = { slideInHorizontally { -it } },
+                        exitTransition = { slideOutHorizontally { -it } }
+                    ) {
+                        LoginScreen(
+                            onLoginExitoso = {
+                                navController.navigate(Ruta.Home.ruta) {
+                                    popUpTo(Ruta.Login.ruta) { inclusive = true }
+                                }
+                            },
+                            onIrARegistro = { navController.navigate(Ruta.Register.ruta) }
+                        )
+                    }
+                    composable(
+                        route = Ruta.Register.ruta,
+                        enterTransition = { slideInHorizontally { it } },
+                        exitTransition = { slideOutHorizontally { it } }
+                    ) {
+                        RegisterScreen(
+                            onRegistroExitoso = { navController.popBackStack() },
+                            onVolver = { navController.popBackStack() }
+                        )
+                    }
+                    composable(
+                        route = Ruta.Home.ruta,
+                        enterTransition = { slideInHorizontally { it } },
+                        exitTransition = { slideOutHorizontally { it } }
+                    ) {
+                        HomeScreen()
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NotiCoinTheme {
-        Greeting("Android")
     }
 }

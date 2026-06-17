@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">NotiCoin</string>
+
+    <!-- Login -->
+    <string name="login_subtitulo">Inicia sesión para continuar</string>
+    <string name="boton_ingresar">Ingresar</string>
+    <string name="ir_a_registro">¿No tienes cuenta? Regístrate</string>
+
+    <!-- Registro -->
+    <string name="registro_titulo">Crear cuenta</string>
+    <string name="registro_subtitulo">Crea tu cuenta para comenzar</string>
+    <string name="boton_registrar">Registrarse</string>
+
+    <!-- Campos comunes -->
+    <string name="campo_usuario">Usuario</string>
+    <string name="campo_contrasena">Contraseña</string>
+    <string name="campo_descripcion">Descripción</string>
+    <string name="campo_seleccionar_crypto">Seleccionar criptomoneda</string>
+
+    <!-- Tabs -->
+    <string name="tab_mercado">Mercado</string>
+    <string name="tab_favoritas">Favoritas</string>
+    <string name="tab_notificaciones">Notificaciones</string>
+
+    <!-- Acciones -->
+    <string name="accion_actualizar">Actualizar</string>
+    <string name="accion_reintentar">Reintentar</string>
+    <string name="accion_agregar_favorita">Agregar a favoritas</string>
+    <string name="accion_eliminar">Eliminar</string>
+    <string name="accion_confirmar">Confirmar</string>
+    <string name="accion_cancelar">Cancelar</string>
+    <string name="accion_guardar">Guardar</string>
+    <string name="accion_agregar_noti">Agregar notificación</string>
+
+    <!-- Estados vacíos -->
+    <string name="sin_favoritas">Sin favoritas aún</string>
+    <string name="sin_favoritas_hint">Agrega cryptos desde el Mercado</string>
+    <string name="sin_notificaciones">Sin notificaciones</string>
+    <string name="sin_notificaciones_hint">Toca el botón + para agregar una alerta</string>
+    <string name="sin_favoritas_para_noti">Primero agrega cryptos a tus favoritas</string>
+
+    <!-- Diálogos -->
+    <string name="dialogo_eliminar_titulo">Eliminar favorita</string>
+    <string name="dialogo_eliminar_texto">¿Eliminar %1$s de favoritas?</string>
+    <string name="dialogo_noti_titulo">Nueva notificación</string>
 </resources>
